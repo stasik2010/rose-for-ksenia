@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Роза для Ксені</title>
+<style>
+  /* Фон і загальні стилі */
+  body, html {
+    margin: 0; padding: 0; height: 100%;
+    background: linear-gradient(to top, #4b8b3b 100px, #87ceeb 100px);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .ground {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 100px;
+    background: #4b8b3b;
+    z-index: 1;
+  }
+
+  /* Контейнер для квітки */
+  .flower-container {
+    position: relative;
+    width: 150px;
+    height: 300px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: flower-grow 2s ease forwards;
+    animation-delay: 0.5s;
+  }
+
+  /* Стебло */
+  .stem {
+    width: 8px;
+    height: 0;
+    background: linear-gradient(green, darkgreen);
+    border-radius: 4px;
+    animation: stem-grow 3s forwards;
+    animation-delay: 0.5s;
+  }
+
+  /* Листя */
+  .leaf {
+    position: absolute;
+    width: 50px;
+    height: 30px;
+    background: linear-gradient(to right, #2f7a2f, #1e4b1e);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    top: 120px;
+    left: -45px;
+    transform-origin: right center;
+    transform: rotate(-30deg) scale(0);
+    animation: leaf-grow 2s forwards;
+    animation-delay: 2.5s;
+  }
+
+  .leaf.right {
+    left: auto;
+    right: -45px;
+    transform-origin: left center;
+    transform: rotate(30deg) scale(0);
+    animation-delay: 3s;
+  }
+
+  /* Квітка (троянда) */
+  .rose {
+    position: relative;
+    margin-top: 10px;
+    width: 100px;
+    height: 100px;
+  }
+
+  /* Центральна пелюстка */
+  .petal {
+    position: absolute;
+    width: 60px;
+    height: 80px;
+    background: radial-gradient(circle at center, #d2204f 30%, #8b0033 90%);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    top: 10px;
+    left: 20px;
+    transform-origin: bottom center;
+    transform: scaleY(0);
+    animation: petal-bloom 3s forwards;
+    animation-delay: 4.5s;
+    box-shadow: inset -5px 0 10px #660029;
+  }
+
+  /* Бічні пелюстки (по 2 з кожної сторони) */
+  .petal.left1, .petal.right1,
+  .petal.left2, .petal.right2 {
+    width: 50px;
+    height: 70px;
+    background: radial-gradient(circle at center, #d2204f 30%, #8b0033 90%);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    top: 25px;
+    transform-origin: bottom center;
+    transform: scaleY(0);
+    animation: petal-bloom 3s forwards;
+    animation-delay: 5s;
+    box-shadow: inset -5px 0 10px #660029;
+  }
+  .petal.left1 {
+    left: 0;
+    transform-origin: bottom right;
+    animation-delay: 5s;
+    transform: scaleY(0) rotate(-30deg);
+  }
+  .petal.right1 {
+    left: 50px;
+    transform-origin: bottom left;
+    animation-delay: 5.2s;
+    transform: scaleY(0) rotate(30deg);
+  }
+  .petal.left2 {
+    left: -15px;
+    top: 40px;
+    transform-origin: bottom right;
+    animation-delay: 5.5s;
+    transform: scaleY(0) rotate(-45deg);
+  }
+  .petal.right2 {
+    left: 65px;
+    top: 40px;
+    transform-origin: bottom left;
+    animation-delay: 5.5s;
+    transform: scaleY(0) rotate(45deg);
+  }
+
+  /* Напис на фоні */
+  .background-text {
+    position: absolute;
+    top: 30px;
+    width: 100%;
+    text-align: center;
+    font-size: 60px;
+    font-weight: 700;
+    color: rgba(255, 105, 180, 0.3);
+    font-family: 'Brush Script MT', cursive, sans-serif;
+    user-select: none;
+    animation: text-fade-in 3s forwards;
+    animation-delay: 6s;
+    z-index: 0;
+  }
+
+  /* Анімації */
+  @keyframes stem-grow {
+    from { height: 0; }
+    to { height: 200px; }
+  }
+
+  @keyframes leaf-grow {
+    from { transform: scale(0) rotate(0); opacity: 0; }
+    to { transform: scale(1) rotate(var(--rotate)); opacity: 1; }
+  }
+
+  @keyframes petal-bloom {
+    from { transform: scaleY(0) rotate(0); opacity: 0; }
+    to { transform: scaleY(1) rotate(0); opacity: 1; }
+  }
+
+  @keyframes flower-grow {
+    from { transform: translateY(100px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  @keyframes text-fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+</style>
+</head>
+<body>
+  <div class="ground"></div>
+
+  <div class="flower-container" aria-label="Квітка троянда">
+    <div class="stem"></div>
+
+    <div class="leaf" style="--rotate: -30deg;"></div>
+    <div class="leaf right" style="--rotate: 30deg;"></div>
+
+    <div class="rose">
+      <div class="petal"></div>
+      <div class="petal left1"></div>
+      <div class="petal right1"></div>
+      <div class="petal left2"></div>
+      <div class="petal right2"></div>
+    </div>
+  </div>
+
+  <div class="background-text">Для Ксені</div>
+</body>
+</html>
